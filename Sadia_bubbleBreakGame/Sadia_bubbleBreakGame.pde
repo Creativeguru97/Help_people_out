@@ -18,7 +18,8 @@ color bubbleFill = color(0, 0, 0);
 
 boolean isInitialized = false;
 
-int score = 0;
+int totalScore = 6;
+int sceneScore = 0;
 
 void setup() {
   size(800, 600);
@@ -35,7 +36,8 @@ void draw() {
   
   fill(0, 150);
   textSize(30);
-  text("Score: "+score, width-200, 50);
+  int displayScore = totalScore+sceneScore;
+  text("Score: "+displayScore, width-200, 50);
   
   
   if(isInitialized == true){
@@ -122,7 +124,7 @@ void checkColision(){
       bubbleCoords.remove(i);//First we remove the x value
       bubbleCoords.remove(i);//Right after erase the x value, the y value slide into the position, so we erase that y value too.
       
-      score++;//yay
+      sceneScore+=2;//yay
     }
   }
 }
@@ -167,4 +169,16 @@ void initialize(){
   //Initialize the bubble diamter and fill
   diameter = int(random(40, 80));
   bubbleFill = color(int(random(0, 255)), int(random(0, 255)), int(random(0, 255)), 125);//I added a bit of transparency
+  
+  if(sceneScore == 0){
+    if(totalScore > 0){
+      totalScore -= 1;
+    }else{
+    }
+    
+  }else if(sceneScore > 0){
+    totalScore += sceneScore;
+  }
+  sceneScore = 0;
+  
 }
